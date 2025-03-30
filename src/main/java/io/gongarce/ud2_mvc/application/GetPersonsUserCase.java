@@ -21,6 +21,6 @@ public class GetPersonsUserCase implements UseCase {
     public List<Person> get(@NonNull Optional<String> mail) {
         return mail
                 .map(personRepository::getByMail)
-                .orElse(personRepository.getAll());
+                .orElseGet(personRepository::getAll);
     }
 }
