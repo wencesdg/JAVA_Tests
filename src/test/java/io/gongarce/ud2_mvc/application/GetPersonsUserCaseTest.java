@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Optional;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 
 /**
  *
@@ -15,11 +16,13 @@ import org.junit.jupiter.api.Test;
  */
 public class GetPersonsUserCaseTest {
 
+    PersonRepository personRepository;
+
     private final GetPersonsUserCase personUseCase;
 
     public GetPersonsUserCaseTest() {
-        PersonRepository mockPersonRepository = new PersonRepositoryMock();
-        this.personUseCase = new GetPersonsUserCase(mockPersonRepository);
+        personRepository = Mockito.mock(PersonRepository.class);
+        this.personUseCase = new GetPersonsUserCase(personRepository);
     }
 
     @Test
@@ -29,8 +32,11 @@ public class GetPersonsUserCaseTest {
         List<Person> expected = Arrays.asList(
                 new Person(1l, "123456789A", "Gonzalo", "A Coruña", null, null),
                 new Person(2l, "123456789A", "Alejandro", "Madrid", null, null));
+        Mockito.when(personRepository.getAll()).thenReturn(expected);
+
         // when
         List<Person> actual = personUseCase.get(empty);
+
         // then
         Assertions.assertEquals(expected, actual);
         Assertions.assertEquals(expected.get(0), actual.get(0));
@@ -41,10 +47,13 @@ public class GetPersonsUserCaseTest {
         // with
         String email = "gonzalo@gmail.com";
         List<Person> expected = Arrays.asList(
-                new Person(1l, "123456789A", "Elena", "A Coruña", null, null),
-                new Person(2l, "123456789A", "Paula", "Pontevedra", null, null));
+                new Person(1l, "123456789A", "Gonzalo", "A Coruña", null, null),
+                new Person(2l, "123456789A", "Alejandro", "Madrid", null, null));
+        Mockito.when(personRepository.getByMail(email)).thenReturn(expected);
+
         // when
         List<Person> actual = personUseCase.get(Optional.of(email));
+
         // then
         Assertions.assertEquals(expected, actual);
         Assertions.assertEquals(expected.get(0), actual.get(0));
