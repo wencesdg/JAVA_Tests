@@ -57,5 +57,7 @@ public class GetPersonsUserCaseTest {
         // then
         Assertions.assertEquals(expected, actual);
         Assertions.assertEquals(expected.get(0), actual.get(0));
+        Mockito.verify(personRepository, Mockito.times(1)).getByMail(email);
+        Mockito.verify(personRepository, Mockito.only()).getByMail(email);
     }
 }
