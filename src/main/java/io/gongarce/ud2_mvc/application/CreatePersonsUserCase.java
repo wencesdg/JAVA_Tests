@@ -22,10 +22,12 @@ import lombok.RequiredArgsConstructor;
 public class CreatePersonsUserCase implements UseCase {
 
     private final PersonRepository personRepository;
+    
+    private final NifValidator nifValidator;
 
     public Person create(@NonNull Person person) throws SavePersonException, NifExistingException, WrongNifException, WrongPhoneException {
         Validator.of(person)
-                .validate(NifValidator::isValid, () -> new WrongNifException())
+                .validate(nifValidator::isValid, () -> new WrongNifException())
                 .validate(PhoneValidator::isValid, () -> new WrongPhoneException());
 
         var existingPerson = personRepository.get(person.getNif());

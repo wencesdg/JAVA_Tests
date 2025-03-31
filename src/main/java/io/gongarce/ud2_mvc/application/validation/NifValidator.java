@@ -8,7 +8,7 @@ import io.gongarce.ud2_mvc.domain.person.Person;
  */
 public class NifValidator {
 
-    public static boolean isValid(Person person) {
+    public boolean isValid(Person person) {
         String nif = person.getNif();
         if (nif.length() != 9) {
             return false;
