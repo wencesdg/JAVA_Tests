@@ -57,13 +57,13 @@ public class JdbcPersonRepository implements PersonRepository {
         return PersonEntityMapper.INSTANCE.toDomain(persons);
     }
 
-    @Override
-    public List<Person> getByMail(String address) {
-        Query query = entityManager.createNamedQuery("Person.findByMail");
-        query.setParameter("mail", address);
-        List<PersonEntity> persons = query.getResultList();
-        return PersonEntityMapper.INSTANCE.toDomain(persons);
-    }
+@Override
+public List<Person> getByMail(String address) {
+    Query query = entityManager.createNamedQuery("Person.findByMail");
+    query.setParameter("mail", "%" + address + "%");
+    List<PersonEntity> persons = query.getResultList();
+    return PersonEntityMapper.INSTANCE.toDomain(persons);
+}
 
     private Optional<PersonEntity> findByNif(String nif) {
         Query query = entityManager.createNamedQuery("Person.findByNif");
