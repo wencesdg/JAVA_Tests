@@ -60,7 +60,7 @@ public class JdbcPersonRepository implements PersonRepository {
     @Override
     public List<Person> getByMail(String address) {
         Query query = entityManager.createNamedQuery("Person.findByMail");
-        query.setParameter("mail", "%" + address + "%");
+        query.setParameter("mail", address);
         List<PersonEntity> persons = query.getResultList();
         return PersonEntityMapper.INSTANCE.toDomain(persons);
     }
