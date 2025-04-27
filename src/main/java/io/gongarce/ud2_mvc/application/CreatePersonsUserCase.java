@@ -25,7 +25,11 @@ public class CreatePersonsUserCase implements UseCase {
     
     private final NifValidator nifValidator;
     
+<<<<<<< HEAD
     private final PhoneValidator  phoneValidator;
+=======
+    private final PhoneValidator phoneValidator;
+>>>>>>> ejercicios
 
     public Person create(@NonNull Person person) throws SavePersonException, NifExistingException, WrongNifException, WrongPhoneException {
         Validator.of(person)
