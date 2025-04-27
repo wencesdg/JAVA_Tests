@@ -23,6 +23,8 @@ import lombok.RequiredArgsConstructor;
 public class UpdatePersonsUserCase implements UseCase {
 
     private final PersonRepository personRepository;
+    
+    private final PhoneValidator  phoneValidator;
 
     public Person update(@NonNull Person person) 
             throws SavePersonException, WrongNifException, WrongPhoneException, NotFoundException, ModifyNifException, NifExistingException {
@@ -30,7 +32,7 @@ public class UpdatePersonsUserCase implements UseCase {
 
         Validator.of(person)
                 .validate((p) -> !existingPerson.getNif().equals(p.getNif()), () -> new ModifyNifException())
-                .validate(PhoneValidator::isValid, () -> new WrongPhoneException());
+                .validate(phoneValidator::isValid, () -> new WrongPhoneException());
 
         return personRepository.save(person);
     }
