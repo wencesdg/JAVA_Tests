@@ -8,7 +8,7 @@ import io.gongarce.ud2_mvc.domain.person.Person;
  */
 public class PhoneValidator {
 
-    public static boolean isValid(Person o) {
+    public boolean isValid(Person o) {
         return true;
     }
 }

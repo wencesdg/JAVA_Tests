@@ -1,6 +1,7 @@
 package io.gongarce.ud2_mvc.application;
 
 import io.gongarce.ud2_mvc.application.validation.NifValidator;
+import io.gongarce.ud2_mvc.application.validation.PhoneValidator;
 import io.gongarce.ud2_mvc.domain.person.Person;
 import io.gongarce.ud2_mvc.domain.person.PersonRepository;
 import io.gongarce.ud2_mvc.domain.person.error.WrongNifException;
@@ -17,13 +18,15 @@ public class CreatePersonsUserCaseTest {
     PersonRepository personRepository;
     
     NifValidator nifValidator;
+    
+    PhoneValidator phoneValidator;
 
     private final CreatePersonsUserCase personUseCase;
     
     public CreatePersonsUserCaseTest() {
         personRepository = Mockito.mock(PersonRepository.class);
         nifValidator = Mockito.mock(NifValidator.class);
-        this.personUseCase = new CreatePersonsUserCase(personRepository, nifValidator);
+        this.personUseCase = new CreatePersonsUserCase(personRepository, nifValidator, phoneValidator);
     }
 
     @Test
