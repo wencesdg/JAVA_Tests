@@ -23,12 +23,10 @@ import lombok.RequiredArgsConstructor;
 public class UpdatePersonsUserCase implements UseCase {
 
     private final PersonRepository personRepository;
-<<<<<<< HEAD
+
     
     private final PhoneValidator  phoneValidator;
-=======
-    private final PhoneValidator phoneValidator;
->>>>>>> ejercicios
+
 
     public Person update(@NonNull Person person) 
             throws SavePersonException, WrongNifException, WrongPhoneException, NotFoundException, ModifyNifException, NifExistingException {

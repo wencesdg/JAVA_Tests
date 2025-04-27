@@ -25,15 +25,13 @@ public class CreatePersonsUserCaseTest {
 
     private final CreatePersonsUserCase personUseCase;
     
-    PhoneValidator phoneValidator;
     
     public CreatePersonsUserCaseTest() {
         personRepository = Mockito.mock(PersonRepository.class);
         nifValidator = Mockito.mock(NifValidator.class);
-<<<<<<< HEAD
+
         phoneValidator = Mockito.mock(PhoneValidator.class);
-=======
->>>>>>> ejercicios
+
         this.personUseCase = new CreatePersonsUserCase(personRepository, nifValidator, phoneValidator);
     }
 
